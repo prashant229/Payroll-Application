@@ -1,0 +1,18 @@
+<div id="dashboard" class="relative bg-red flex flex-col items-center h-full justify-center p-6 space-y-6">
+    <div id="emp" class="bg-white w-full max-w-xs p-4 border border-[#005151] text-[#005151] shadow-lg hover:shadow-xl hover:bg-[#005151] hover:text-white transition-transform transform hover:scale-105 rounded-lg">
+      <a href="/employee" routerLink="/employee" class="block text-center text-lg font-semibold">Employee Details</a>
+    </div>
+    <div id="salary" class="bg-white w-full max-w-xs p-4 border border-[#005151] text-[#005151] shadow-lg hover:shadow-xl hover:bg-[#005151] hover:text-white transition-transform transform hover:scale-105 rounded-lg">
+      <a href="/salary" routerLink="/salary" class="block text-center text-lg font-semibold">Salary Details & Payroll</a>
+    </div>
+    <div id="leaves" class="bg-white w-full max-w-xs p-4 border border-[#005151] text-[#005151] shadow-lg hover:shadow-xl hover:bg-[#005151] hover:text-white transition-transform transform hover:scale-105 rounded-lg">
+      <a href="/leaves" routerLink="/leaves" class="block text-center text-lg font-semibold">Apply for a Leave</a>
+    </div>
+    <div *ngIf="employee.role ==='MANAGER'" id="addEmployee" class="bg-white w-full max-w-xs p-4 border border-[#005151] text-[#005151] shadow-lg hover:shadow-xl hover:bg-[#005151] hover:text-white transition-transform transform hover:scale-105 rounded-lg">
+        <a href="/addEmployee" routerLink="/addEmployee" class="block text-center text-lg font-semibold">Add Employee</a>
+      </div>
+    
+    <!-- Circular Button -->
+  
+  </div>
+  

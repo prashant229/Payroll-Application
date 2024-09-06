@@ -1,0 +1,36 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: "message"
+  mail:
+    host: live.smtp.mailtrap.io
+    port: 587
+    username: api
+    password: e90ced1991e5598b479ed73afda33bac
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+      domain_name: "payroll_services@demomailtrap.com"
+  cloud:
+    function:
+      definition: email
+    stream:
+      bindings:
+        email-in-0:
+          destination: send-notification
+          group: ${spring.application.name}
+        email-out-0:
+          destination: notification-sent
+    kafka:
+      binder:
+        brokers: localhost:9092
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#    connection-timeout: 10s

@@ -1,0 +1,156 @@
+services:
+  configserver:
+    image: mandeepbsaini350/config-server:1.0.0
+    container_name: configserver
+    ports:
+      - "8071:8071"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      start_period: 5s
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      - payrollnetwork
+
+  eurekaserver:
+    image: mandeepbsaini350/eureka-server:1.0.0
+    container_name: eurekaserver
+    ports:
+      - "8070:8070"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      start_period: 5s
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      - payrollnetwork
+
+  employee:
+    image: mandeepbsaini350/employee:1.0.0
+    container_name: employee
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      start_period: 10s
+      interval: 10s
+      timeout: 20s
+      retries: 20
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+    networks:
+      - payrollnetwork
+
+  salary:
+    image: mandeepbsaini350/salary:1.0.0
+    container_name: salary
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      start_period: 10s
+      interval: 10s
+      timeout: 20s
+      retries: 20
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+    networks:
+      - payrollnetwork
+
+
+  batman:
+    image: mandeepbsaini350/batman:1.0.0
+    container_name: leave
+    ports:
+      - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      start_period: 10s
+      interval: 10s
+      timeout: 20s
+      retries: 20
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+    networks:
+      - payrollnetwork
+
+
+  gatewayserver:
+    image: mandeepbsaini350/gateway-server:1.0.0
+    container_name: gatewayserver
+    ports:
+      - "8072:8072"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    healthcheck:
+      test: "curl --fail --silent localhost:8072/actuator/health/readiness | grep UP || exit 1"
+      start_period: 10s
+      interval: 10s
+      timeout: 10s
+      retries: 30
+    depends_on:
+      employee:
+        condition: service_healthy
+      batman:
+        condition: service_healthy
+      salary:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+    networks:
+      - payrollnetwork
+
+
+networks:
+  payrollnetwork:
+    driver: "bridge"

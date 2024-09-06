@@ -1,0 +1,7 @@
+{
+  "/payroll": {
+    "target": "http://localhost:8072",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

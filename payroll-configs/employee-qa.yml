@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "Hey, welcome to payroll - employee related webhook APIs"
+  contactDetails:
+    name: "Smitha Ray - QA Lead"
+    email: "smitha@synergybank.com"
+  onCallSupport:
+    - (666) 265-3765
+    - (666) 734-8371

@@ -1,0 +1,64 @@
+.container {
+    width: 700px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #000;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.company-info, .employee-info {
+    margin-bottom: 20px;
+}
+.company-info {
+    text-align: center;
+}
+.info-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.info-table td {
+    padding: 5px 0;
+}
+.earnings, .deductions {
+    width: 48%;
+}
+.salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.salary-table th, .salary-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: right;
+}
+.salary-table th {
+    background-color: #f2f2f2;
+}
+.salary-table th:first-child, .salary-table td:first-child {
+    text-align: left;
+}
+.total-row {
+    font-weight: bold;
+}
+.signatures {
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+.signature {
+    display: inline-block;
+    width: 45%;
+    margin-top: 40px;
+}
+.net-pay {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.note {
+    text-align: center;
+    margin-top: 20px;
+}

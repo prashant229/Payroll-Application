@@ -1,0 +1,21 @@
+<div class="h-screen flex flex-col justify-between">
+  <app-header></app-header>
+  <div>
+    <h2 class="text-4xl py-2 text-center">Welcome to <span class="text-[#005151]">Payroll</span> Portal</h2>
+    <h3 class="text-xl text-center">Logged in as : {{agentProfile?.email}}</h3>
+  </div>
+
+
+  <div class="h-fit">
+  <!-- <app-login-form></app-login-form> -->
+        <!-- <app-home></app-home> -->
+         <router-outlet></router-outlet>
+        <!-- <app-employee></app-employee> -->
+         <!-- <app-leaves></app-leaves> -->
+          <!-- <app-salary></app-salary>  -->
+           <!-- <app-payslip></app-payslip> -->
+    </div>
+    <app-footer></app-footer>
+</div>
+
+<!-- <h1 class="w-full bg-black text-white">Hello Payroll</h1> -->

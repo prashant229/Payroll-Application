@@ -1,0 +1,43 @@
+<div id="employeePageHeader" class="flex justify-center py-6">
+  <div class="bg-white w-full max-w-3xl p-6 border border-gray-300 rounded-lg shadow-lg">
+    <h3 class="font-bold text-2xl text-center text-[#005151] mb-4">Employee Details</h3>
+    <div class="space-y-4">
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Employee ID:</span>
+        <span>{{ employee.employeeId }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">First Name:</span>
+        <span>{{ employee.firstName }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Last Name:</span>
+        <span>{{ employee.lastName }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Email Address:</span>
+        <span>{{ employee.emailAddress }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Contact Number:</span>
+        <span>{{ employee.contactNumber }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Role:</span>
+        <span>{{ employee.role }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Gender:</span>
+        <span>{{ employee.gender }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Manager ID:</span>
+        <span>{{ employee.managerId }}</span>
+      </p>
+      <p class="flex justify-between text-lg">
+        <span class="font-semibold text-gray-700">Date of Birth:</span>
+        <span>{{ employee.dob | date: "yyyy-MM-dd" }}</span>
+      </p>
+    </div>
+  </div>
+</div>

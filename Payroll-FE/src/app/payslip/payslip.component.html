@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="flex justify-between mb-4">
+        <img src="/image.png" alt="" class="" />
+    <div class="company-info">
+        <p>Ultimate Kronos Group</p>
+        <p>Tower 4 B, Okaya Towers,</p>
+        <p>Sector 62, Noida, Uttar Pradesh 201301</p>
+    </div>
+    </div>
+    
+
+    <table class="info-table">
+        <tr>
+            <td>Employee Name: <strong>{{employee.firstName+ " "+ employee.lastName}}</strong></td>
+            <td>Employee Email: <strong>{{employee.emailAddress}}</strong></td>
+        </tr>
+        <tr>
+            <!-- //add date logic from the api -->
+            <td>Pay Period: <strong>{{payslipData.fromDate}} to {{payslipData.toDate}}</strong></td>
+            <td>Role: <strong>{{employee.role}}</strong></td>
+        </tr>
+
+    </table>
+<!-- {{ payslipData| json}} -->
+    <table class="salary-table">
+        <tr>
+            <th>Earnings</th>
+            <th>Amount</th>
+            <th>Deductions</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td>Basic</td>
+            <td>{{payslipData.totalBasic}}</td>
+            <td>Leaves</td>
+            <td>{{payslipData.totalLeaves*100}}</td>
+        </tr>
+        <tr>
+            <td>Benefits</td>
+            <td>{{payslipData.totalBenefits}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>House Rent Allowance</td>
+            <td>{{payslipData.totalHra}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="total-row">
+            <td>Total Earnings</td>
+            <td>{{calculateTotalSalary()}}</td>
+            <td>Total Deductions</td>
+            <td>{{calculateTotalDeductions()}}</td>
+        </tr>
+        <tr class="total-row">
+            <td colspan="2"></td>
+            <td>Net Pay</td>
+            <td>{{calculateTotalSalary()-calculateTotalDeductions()}}</td>
+        </tr>
+    </table>
+
+    <div class="net-pay">
+        <p>{{calculateTotalSalary()-calculateTotalDeductions()}}</p>
+        <p>{{toWords(calculateTotalSalary()-calculateTotalDeductions())}}</p>
+    </div>
+
+    <div class="signatures">
+        <div class="signature">
+            <p>Employer Signature</p>
+            <p>_________________________</p>
+        </div>
+        <div class="signature">
+            <p>Employee Signature</p>
+            <p>_________________________</p>
+        </div>
+    </div>
+
+    <div class="note">
+        <p>This is a system generated payslip</p>
+    </div>
+</div>

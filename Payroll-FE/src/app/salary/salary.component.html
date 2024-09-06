@@ -1,0 +1,98 @@
+<div id="salaryPageHeader" class="flex justify-center">
+  <div class="bg-white w-full max-w-3xl p-6 border border-gray-300 rounded-lg shadow-lg">
+      <h3 class="font-bold text-xl py-2 text-center">Generate Payroll</h3>
+      <form
+        (ngSubmit)="onSubmit()"
+        #salaryForm="ngForm"
+        novalidate
+        class="px-4 py-4 text-center"
+      >
+        <div class="flex flex-col items-center">
+          <div class="flex justify-between w-full max-w-lg my-2">
+            <label for="from-date" class="mr-4 w-1/4 text-right">From Date:</label>
+            <input
+              class="border-[1px] p-2 border-black rounded-sm w-3/4"
+              type="date"
+              id="from-date"
+              name="from-date"
+              [(ngModel)]="fromDate"
+              required
+            />
+          </div>
+          <div class="flex justify-between w-full max-w-lg my-2">
+            <label for="to-date" class="mr-4 w-1/4 text-right">To Date:</label>
+            <input
+              type="date"
+              id="to-date"
+              name="to-date"
+              class="border-[1px] p-2 border-black rounded-sm w-3/4"
+              [(ngModel)]="toDate"
+              required
+            />
+          </div>
+        </div>
+        <button id="submit2"
+          class="bg-[#005151] text-white rounded-md p-2 mt-4"
+          type="submit"
+          [disabled]="!salaryForm.form.valid"
+        >
+          Generate
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  
+<!-- New div added below the Generate Payroll div -->
+<div class="flex justify-center shadow-xl" *ngIf="employee.role ==='MANAGER'">
+  <div class="bg-slate-200 w-4/5 p-2 border-[1px] border-black text-center rounded-md my-6">
+    <h3 class="font-bold text-xl py-2">Pay Salary</h3>
+    <form
+    (ngSubmit)="onPayment()"
+    #paymentForm="ngForm"
+    novalidate
+    class="border-2 px-4 py-4 text-center"
+  >
+    <div class="flex flex-col items-center">
+      <tr>
+        <td>
+          <label for="payment-date" class="">Date of Payment:</label>
+        </td>
+        <td>
+          <input
+            class="my-4 border-[1px] p-2 border-black rounded-sm"
+            type="date"
+            id="payment-date"
+            name="payment-date"
+            [(ngModel)]="paymentDate"
+            required
+            placeholder="Email"
+          />
+        </td>
+      </tr>
+    </div>
+    <button 
+      class="bg-[#005151] text-white rounded-md p-2"
+      type="submit"
+      [disabled]="!paymentForm.form.valid"
+    >
+      Pay Salaries
+    </button>
+
+  </form>
+  <!-- Validation message shown when payment is successful -->
+<div *ngIf="paymentSuccessMessage" class="success-message">
+  {{ paymentSuccessMessage }}
+</div>
+  </div>
+</div>
+
+<div *ngIf="result" class="my-6 flex flex-col items-center">
+    <!-- <div #contentToExport> -->
+        <app-payslip [payslipData]="result" [employee]="employee" id="payslip-content"></app-payslip>
+        <button (click)="downloadPDF()" class="bg-[#005151] text-white rounded-md p-2">Download as PDF</button>
+    </div>
+    <!-- <button (click)="downloadPDF()">Download as PDF</button> -->
+<!-- </div> -->
+
+

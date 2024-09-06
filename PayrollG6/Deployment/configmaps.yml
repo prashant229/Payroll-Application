@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payroll-configmap
+data:
+  SPRING_PROFILES_ACTIVE: prod
+  SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka:8070/eureka/"
+  CONFIGSERVER_APPLICATION_NAME: configserver
+  EUREKA_APPLICATION_NAME: eurekaserver
+  EMPLOYEE_APPLICATION_NAME: employee
+  SALARY_APPLICATION_NAME: salary
+  LEAVES_APPLICATION_NAME: leaves
+  GATEWAY_APPLICATION_NAME: gatewayserver
+  KEYCLOAK_ADMIN: admin
+  KEYCLOAK_ADMIN_PASSWORD: admin
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "2001"
+  POSTGRES_DB: "postgres"
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:7080/realms/master/protocol/openid-connect/certs"

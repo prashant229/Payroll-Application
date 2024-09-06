@@ -1,0 +1,66 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: employee
+
+  config:
+    import: "optional:configserver:http://configserver:8071"
+  profiles:
+    active: qa
+  datasource:
+    url: jdbc:postgresql://postgres-deployment:5432/postgres
+    username: postgres
+    password: 2001
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    #    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    #  h2:
+    #    console:
+    #      enabled: true
+    #      path: /h2-console
+    transaction:
+      rollback-on-commit-failure: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: "http://eurekaserver:8070/eureka/"
+
+info:
+  app:
+    name: "Employee MS"
+    description: "Employee MS for Payroll Management System"
+    version: "1.0.0"
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
